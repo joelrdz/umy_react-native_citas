@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
 import Appointment from './components/Appointment';
+import Form from './components/Form';
 
 const App = () => {
   // Definir el state de las citas
@@ -20,6 +21,7 @@ const App = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>AppOinments</Text>
+      <Form />
       <Text style={styles.title}>
         {appointments.length > 0 ? 'Administra tus citas' : 'No hay citas, agrega una'}
       </Text>
