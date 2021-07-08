@@ -10,12 +10,22 @@ const App = () => {
     { id: '3', patient: 'Native', owner: 'Joseph', symptoms: 'No camina' }
   ]);
 
+  // Eliminar cita del state
+  const deleteAppointment = id => {
+    setAppointments(currentAppointments => {
+      return currentAppointments.filter(appointment => appointment.id !== id);
+    });
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>AppOinments</Text>
+      <Text style={styles.title}>
+        {appointments.length > 0 ? 'Administra tus citas' : 'No hay citas, agrega una'}
+      </Text>
       <FlatList
         data={appointments}
-        renderItem={({ item }) => <Appointment item={item} />}
+        renderItem={({ item }) => <Appointment item={item} deleteAppointment={deleteAppointment} />}
         keyExtractor={appointment => appointment.id}
       />
     </View>
@@ -32,7 +42,8 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginTop: 40
+    marginTop: 40,
+    marginBottom: 20
   }
 });
 

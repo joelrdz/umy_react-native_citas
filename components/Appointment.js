@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 
-const Appointment = ({item}) => {
-  const deleteHandler = () => {
-    console.log('eliminando...');
+const Appointment = ({ item, deleteAppointment }) => {
+  const deleteHandler = id => {
+    deleteAppointment(id);
   }
 
   return (
@@ -21,7 +21,7 @@ const Appointment = ({item}) => {
         <Text style={styles.text}>{item.symptoms}</Text>
       </View>
       <View>
-        <TouchableHighlight onPress={() => deleteHandler()} style={styles.btnDelete}>
+        <TouchableHighlight onPress={() => deleteHandler(item.id)} style={styles.btnDelete}>
           <Text style={styles.txtDelete}>Eliminar &times;</Text>
         </TouchableHighlight>
       </View>
