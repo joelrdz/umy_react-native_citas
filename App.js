@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, FlatList } from 'react-native';
+import Appointment from './components/Appointment';
 
 const App = () => {
   // Definir el state de las citas
@@ -14,19 +15,9 @@ const App = () => {
       <Text style={styles.title}>AppOinments</Text>
       <FlatList
         data={appointments}
-        renderItem={({ item }) => (
-          <View>
-            <Text>{item.patient}</Text>
-          </View>
-        )}
+        renderItem={({ item }) => <Appointment item={item} />}
         keyExtractor={appointment => appointment.id}
       />
-
-      {/* {appointments.map(appointment => (
-        <View key={appointment.id}>
-          <Text>{appointment.patient}</Text>
-        </View>
-      ))} */}
     </View>
   );
 };
