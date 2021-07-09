@@ -3,6 +3,9 @@ import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const Form = () => {
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
 
@@ -15,8 +18,14 @@ const Form = () => {
     setDatePickerVisibility(false);
   };
 
-  const handleDateConfirm = (date) => {
-    console.warn("A date has been picked: ", date);
+  const handleDateConfirm = date => {
+    const options = {
+      year: 'numeric',
+      month: 'long',
+      day: '2-digit'
+    }
+
+    setDate(date.toLocaleDateString('es-ES', options));
     hideDatePicker();
   };
 
@@ -29,8 +38,13 @@ const Form = () => {
     setTimePickerVisibility(false);
   };
 
-  const handleTimeConfirm = (time) => {
-    console.warn("A time has been picked: ", time);
+  const handleTimeConfirm = time => {
+    const options = {
+      hour: 'numeric',
+      minute: '2-digit'
+    }
+
+    setTime(time.toLocaleString('en-US', options));
     hideTimePicker();
   };
 
@@ -45,7 +59,7 @@ const Form = () => {
           />
         </View>
         <View>
-          <Text style={styles.label}>Propietario::</Text>
+          <Text style={styles.label}>Propietario:</Text>
           <TextInput
             style={styles.input}
             onChangeText={(text) => console.log(text)}
@@ -60,6 +74,7 @@ const Form = () => {
           />
         </View>
         <View>
+          <Text style={styles.label}>Fecha:</Text>
           <Button title="Seleccionar Fecha" onPress={showDatePicker} />
           <DateTimePickerModal
             isVisible={isDatePickerVisible}
@@ -67,13 +82,13 @@ const Form = () => {
             onConfirm={handleDateConfirm}
             onCancel={hideDatePicker}
             locale='es_ES'
-            isHeaderVisibleIOS
-            headerTextIOS='Elige la fecha'
             cancelTextIOS='Cancelar'
             confirmTextIOS='Confirmar'
           />
+          <Text>{date}</Text>
         </View>
         <View>
+        <Text style={styles.label}>Hora:</Text>
           <Button title="Seleccionar Hora" onPress={showTimePicker} />
           <DateTimePickerModal
             isVisible={isTimePickerVisible}
@@ -81,11 +96,10 @@ const Form = () => {
             onConfirm={handleTimeConfirm}
             onCancel={hideTimePicker}
             locale='es_ES'
-            isHeaderVisibleIOS
-            headerTextIOS='Elige una hora'
             cancelTextIOS='Cancelar'
             confirmTextIOS='Confirmar'
           />
+          <Text>{time}</Text>
         </View>
         <View>
           <Text style={styles.label}>Síntomas:</Text>
