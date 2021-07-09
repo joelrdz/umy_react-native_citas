@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Button, TouchableHighlight, Alert, ScrollView } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import shortid from 'shortid';
 
-const Form = () => {
+const Form = ({ appointments, setAppointments, setShowForm }) => {
   const [patient, setPatient] = useState('');
   const [owner, setOwner] = useState('');
   const [phone, setPhone] = useState('');
@@ -52,7 +53,7 @@ const Form = () => {
     hideTimePicker();
   };
 
-  // Crear nueva cita
+  // Manejar el submit de nueva cita
   const submitHandler = () => {
     // Validar
     if (
@@ -67,6 +68,26 @@ const Form = () => {
       showAlert();
       return;
     }
+
+    // Crear nueva cita
+    const appointment = {
+      patient,
+      owner,
+      phone,
+      date,
+      time,
+      symptoms
+    };
+
+    appointment.id = shortid.generate();
+
+    // Agregar cita al state
+    const updatedAppointments = [...appointments, appointment];
+    console.log(updatedAppointments);
+    setAppointments(updatedAppointments);
+
+    // Hide form
+    setShowForm(false);
   }
 
   // Alert - Fallo de validación
