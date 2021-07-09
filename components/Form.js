@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TextInput, Button, TouchableHighlight, Alert } from 'react-native';
+import { StyleSheet, View, Text, TextInput, Button, TouchableHighlight, Alert, ScrollView } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const Form = () => {
@@ -83,7 +83,7 @@ const Form = () => {
 
   return (
     <>
-      <View style={styles.form}>
+      <ScrollView style={styles.form}>
         <View>
           <Text style={styles.label}>Paciente:</Text>
           <TextInput
@@ -144,10 +144,10 @@ const Form = () => {
         </View>
         <View>
           <TouchableHighlight onPress={() => submitHandler()} style={styles.btnSubmit}>
-            <Text style={styles.txtSubmit}>Crear Cita</Text>
+            <Text style={styles.txtSubmit}>Crear Nueva Cita</Text>
           </TouchableHighlight>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 }
@@ -156,8 +156,7 @@ const styles = StyleSheet.create({
   form: {
     backgroundColor: '#fff',
     paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginHorizontal: '2.5%'
+    paddingVertical: 10
   },
   label: {
     fontWeight: 'bold',
